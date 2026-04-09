@@ -1323,7 +1323,7 @@ GameObject:
   - component: {fileID: 7868145113264781851}
   - component: {fileID: 7320033349216710771}
   - component: {fileID: 1812595443507074427}
-  - component: {fileID: 4333484499644326266}
+  - component: {fileID: -1129256140078073608}
   - component: {fileID: 5329730434036827012}
   - component: {fileID: -691984302885895320}
   - component: {fileID: 4469365164732628785}
@@ -1468,7 +1468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LifetimeCap
   lifetime: 10
---- !u!114 &4333484499644326266
+--- !u!114 &-1129256140078073608
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1477,15 +1477,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7905268037242933501}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87ca7f687ce6aac4c81ab32a611af848, type: 3}
+  m_Script: {fileID: 11500000, guid: e604e56995784d144b48abf925553247, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RaycastTrigger
-  radius: 72.14
-  destructibleMask:
-    serializedVersion: 2
-    m_Bits: 64
-  maxHits: 16
-  agent: {fileID: 4469365164732628785}
+  m_EditorClassIdentifier: Assembly-CSharp::TrackerTrigger
 --- !u!114 &5329730434036827012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1511,12 +1505,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Destructible
   maxHits: 10
-  eventOnDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  eventOnGetDamage:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!195 &4469365164732628785
 NavMeshAgent:
   m_ObjectHideFlags: 0
