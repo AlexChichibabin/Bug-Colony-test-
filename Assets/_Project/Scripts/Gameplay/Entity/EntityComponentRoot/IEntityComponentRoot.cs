@@ -6,4 +6,5 @@ public interface IEntityComponentRoot : IHasCapability
 	EntityId Id { get; }
 	EntityConfig Config { get; }
 	void Initialize();
+	bool TryGetCapabilitiesByType<T>(out T[] caps) where T : class;
 }

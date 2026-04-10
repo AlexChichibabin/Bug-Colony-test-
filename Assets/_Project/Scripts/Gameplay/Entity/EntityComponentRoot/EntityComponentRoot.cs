@@ -5,7 +5,6 @@ using UnityEngine;
 
 public abstract class EntityComponentRoot : MonoBehaviour, IEntityComponentRoot
 {
-	public IReadOnlyDictionary<Type, object> Capabilities => capabilities;
 	public GameObject GameObject => gameObject;
 	public EntityId Id => id;
 	public EntityConfig Config => config;
@@ -39,6 +38,21 @@ public abstract class EntityComponentRoot : MonoBehaviour, IEntityComponentRoot
 			return cap != null;
 		}
 		cap = null;
+		return false;
+	}
+	public bool TryGetCapabilitiesByType<T>(out T[] caps) where T : class
+	{
+		List<T> list = new();
+		foreach (var comp in capabilities.Values)
+		{
+			if (comp is T) list.Add(comp as T);
+		}
+		if (list.Count > 0)
+		{
+			caps = list.ToArray();
+			return true;
+		}
+		caps = null;
 		return false;
 	}
 }

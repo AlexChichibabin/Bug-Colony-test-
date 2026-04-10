@@ -14,7 +14,7 @@ public class Poolable : MonoBehaviour, IPoolable, IDisposable
 	private IEntityPool pool;
 	private IEntityComponentRoot root;
 	private IDestructible destructible;
-    private IReadOnlyDictionary<Type, object> capabilities;
+    private ISpawnable[] spawnables;
     private readonly CompositeDisposable disp = new();
 
 	[Inject]
@@ -25,16 +25,16 @@ public class Poolable : MonoBehaviour, IPoolable, IDisposable
 	}
 	public void OnSpawned()
 	{
-		foreach (var cap in capabilities.Values)
+		foreach (var cap in spawnables)
 		{
-			if (cap is ISpawnable) (cap as ISpawnable).OnSpawned();
+			cap.OnSpawned();
 		}
 	}
 	public void OnDespawned()
 	{
-        foreach (var cap in capabilities.Values)
+        foreach (var cap in spawnables)
         {
-            if (cap is ISpawnable) (cap as ISpawnable).OnDespawned();
+            cap.OnDespawned();
         }
     }
 	public void Despawn()
@@ -45,7 +45,7 @@ public class Poolable : MonoBehaviour, IPoolable, IDisposable
 	public void Initialize(IEntityComponentRoot value)
 	{
 		root = value;
-		capabilities = root.Capabilities;
+		root.TryGetCapabilitiesByType(out spawnables);
 
         root.TryGetCapability(out destructible);
 
