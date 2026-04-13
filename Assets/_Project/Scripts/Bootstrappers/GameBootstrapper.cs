@@ -4,18 +4,18 @@ using Zenject;
 public class GameBootstrapper : IInitializable
 {
     private IGameStateSwitcher gameStateSwitcher;
-    private GameBootstrappState gameBootstrappState;
+    private GameBootstrapState gameBootstrapState;
     private LoadNextLevelState loadNextLevelState;
 
 
     public GameBootstrapper(
         IGameStateSwitcher gameStateSwitcher, 
-        GameBootstrappState gameBootstrappState, 
+        GameBootstrapState gameBootstrapState, 
         LoadNextLevelState loadNextLevelState
         )
     {
         this.gameStateSwitcher = gameStateSwitcher;
-        this.gameBootstrappState = gameBootstrappState;
+        this.gameBootstrapState = gameBootstrapState;
         this.loadNextLevelState = loadNextLevelState;
     }
 
@@ -27,9 +27,9 @@ public class GameBootstrapper : IInitializable
 
     private void InitGameStateMachine()
     {
-        gameStateSwitcher.AddState(gameBootstrappState);
+        gameStateSwitcher.AddState(gameBootstrapState);
         gameStateSwitcher.AddState(loadNextLevelState);
 
-        gameStateSwitcher.Enter<GameBootstrappState>();
+        gameStateSwitcher.Enter<GameBootstrapState>();
     }
 }

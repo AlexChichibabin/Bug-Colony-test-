@@ -30,7 +30,7 @@ public class LevelInstaller : MonoInstaller
 	private void RegisterLevelStateMachine()
     {
         Container.Bind<ILevelStateSwitcher>().To<LevelStateMachine>().AsSingle();
-        Container.Bind<LevelBootstrappState>().FromNew().AsSingle();
+        Container.Bind<LevelBootstrapState>().FromNew().AsSingle();
 		Container.Bind<LevelGameplayState>().FromNew().AsSingle();
         Container.Bind<LevelStateMachineTicker>().FromInstance(levelStateMachineTicker).AsSingle(); // ??
     }
@@ -38,7 +38,7 @@ public class LevelInstaller : MonoInstaller
     private void UnregisterLevelStateMachine()
     {
         Container.Unbind<ILevelStateSwitcher>();
-		Container.Unbind<LevelBootstrappState>();
+		Container.Unbind<LevelBootstrapState>();
 		Container.Unbind<LevelGameplayState>();
         Container.Unbind<LevelStateMachineTicker>();
     }
@@ -60,5 +60,4 @@ public class LevelInstaller : MonoInstaller
         Container.Bind<IEntityRule>().To<PredatorSpawnRunner>().AsSingle();
         Container.Bind<IEntityRule>().To<FoodSpawnRunner>().AsSingle();
     }
-
 }

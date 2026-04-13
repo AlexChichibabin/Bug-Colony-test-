@@ -3,7 +3,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelBootstrappState : IEnterableState
+public class LevelBootstrapState : IEnterableState
 {
     private ILevelStateSwitcher levelStateSwitcher;
     private IConfigProvider configProvider;
@@ -13,7 +13,7 @@ public class LevelBootstrappState : IEnterableState
     private IEntityRuleTracker ruleRunner;
 	private CancellationTokenSource cts = new();
 
-	public LevelBootstrappState( 
+	public LevelBootstrapState( 
         ILevelStateSwitcher levelStateSwitcher,
         IConfigProvider configProvider,
         IEntityPool pool,

@@ -4,9 +4,9 @@ using UnityEngine;
 public class Feedable : MonoBehaviour, IFeedable
 {
 	public IEntityComponentRoot Root => root;
-	public IReactiveProperty<int> EatenCount => eatedCount;
+	public IReactiveProperty<int> EatenCount => eatenCount;
 
-	private ReactiveProperty<int> eatedCount = new();
+	private ReactiveProperty<int> eatenCount = new();
 	private IEntityComponentRoot root;
 
 
@@ -14,7 +14,7 @@ public class Feedable : MonoBehaviour, IFeedable
 	{
 		if (foodCount <= 0) return;
 
-		eatedCount.Value += foodCount;
+		eatenCount.Value += foodCount;
 	}
 
 	public void Initialize(IEntityComponentRoot value)
@@ -24,7 +24,7 @@ public class Feedable : MonoBehaviour, IFeedable
 
 	public void ResetFood()
 	{
-		eatedCount.Value = 0;
+		eatenCount.Value = 0;
 	}
 
 	private void OnDisable()

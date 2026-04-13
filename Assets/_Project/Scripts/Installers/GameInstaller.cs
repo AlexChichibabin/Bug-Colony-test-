@@ -22,7 +22,7 @@ public class GameInstaller : MonoInstaller
     private void RegisterGameStateMachine()
 	{
 		Container.Bind<IGameStateSwitcher>().To<GameStateMachine>().AsSingle();
-		Container.Bind<GameBootstrappState>().FromNew().AsSingle();
+		Container.Bind<GameBootstrapState>().FromNew().AsSingle();
 		Container.Bind<LoadNextLevelState>().FromNew().AsSingle();
 	}
 

@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Project/Scenes/BootstrappScene.unity
+    path: Assets/_Project/Scenes/BootstrapScene.unity
     guid: dc1d483e0e834af4c8b30b22261add27
   - enabled: 1
     path: Assets/_Project/Scenes/GameplayScene.unity

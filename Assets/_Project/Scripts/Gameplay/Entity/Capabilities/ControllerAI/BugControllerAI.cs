@@ -53,7 +53,7 @@ public class BugControllerAI : MonoBehaviour, IControllerAI, ISpawnable
 				}
 				else if (trigger != null) FindTarget(trigger.Candidates);
 			})
-			.AddTo(this);
+			.AddTo(disp);
 
 		Observable
 			.Interval(TimeSpan.FromSeconds(1))

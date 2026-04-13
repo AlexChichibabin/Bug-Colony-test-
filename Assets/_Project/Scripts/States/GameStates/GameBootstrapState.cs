@@ -3,12 +3,12 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
-public class GameBootstrappState : IEnterableState
+public class GameBootstrapState : IEnterableState
 {
     private IGameStateSwitcher gameStateSwitcher;
     private IConfigProvider configProvider;
 
-	public GameBootstrappState(
+	public GameBootstrapState(
         IGameStateSwitcher gameStateSwitcher, 
         IConfigProvider configProvider)
     {
@@ -31,7 +31,7 @@ public class GameBootstrappState : IEnterableState
 		configProvider.Load();
 
 		var sceneName = SceneManager.GetActiveScene().name;
-		if (sceneName == Constants.BootstrappSceneName || sceneName == Constants.GameplaySceneName)
+		if (sceneName == Constants.BootstrapSceneName || sceneName == Constants.GameplaySceneName)
 			gameStateSwitcher.Enter<LoadNextLevelState>();
 	}
 }
