@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class EntityStrategiesTracker : IEntityStrategiesTracker, IDisposable
+public class EntityStrategiesProvider : IEntityStrategiesProvider, IDisposable
 {
 	public IReadOnlyDictionary<EntityId, IEntityRule> EntityRules => rules;
-    public IReadOnlyDictionary<EntityId, IEntityFactory> EntityFactories => factories;
+    //public IReadOnlyDictionary<EntityId, IEntityFactory> EntityFactories => factories;
     public IReadOnlyDictionary<TargetingStrategyType, ITargetingStrategy> TargetingStrategy => targetings;
 
 
@@ -15,14 +15,14 @@ public class EntityStrategiesTracker : IEntityStrategiesTracker, IDisposable
 
 
 
-    public EntityStrategiesTracker(
+    public EntityStrategiesProvider(
 		List<IEntityRule> rules,
-		List<ITargetingStrategy> targetings,
-		List<IEntityFactory> factories)
+		List<ITargetingStrategy> targetings/*,
+		List<IEntityFactory> factories*/)
 	{
-		this.rules = rules.ToDictionary(x => x.Id);
-        this.factories = factories.ToDictionary(x => x.Id);
-        this.targetings = targetings.ToDictionary(x => x.Type);
+		this.rules = rules.ToDictionary(x => x.Id, x => x);
+        //this.factories = factories.ToDictionary(x => x.Id, x => x);
+        this.targetings = targetings.ToDictionary(x => x.Type, x => x);
     }
 
 	public void Initialize()

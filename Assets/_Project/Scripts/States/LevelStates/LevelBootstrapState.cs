@@ -10,7 +10,6 @@ public class LevelBootstrapState : IEnterableState
     private IEntityPool pool;
     private IEntityTracker tracker;
     private IEntitySpawner entitySpawner;
-    private IEntityStrategiesTracker ruleRunner;
 	private CancellationTokenSource cts = new();
 
 	public LevelBootstrapState( 
@@ -18,9 +17,7 @@ public class LevelBootstrapState : IEnterableState
         IConfigProvider configProvider,
         IEntityPool pool,
         IEntitySpawner entitySpawner,
-        IEntityTracker tracker,
-        IEntityStrategiesTracker ruleRunner
-        
+        IEntityTracker tracker
 		)
     {
         this.levelStateSwitcher = levelStateSwitcher;
@@ -28,7 +25,6 @@ public class LevelBootstrapState : IEnterableState
         this.pool = pool;
         this.entitySpawner = entitySpawner;
         this.tracker = tracker;
-        this.ruleRunner = ruleRunner;
     }
 
     public async void Enter()

@@ -9,11 +9,11 @@ public sealed class PredatorFactory : IEntityFactory
 
     private IGameFactory gameFactory;
     private EntityConfig config;
-    private IEntityStrategiesTracker tracker;
+    private IEntityStrategiesProvider tracker;
 
     public PredatorFactory(
         IGameFactory gameFactory,
-        IEntityStrategiesTracker tracker,
+        IEntityStrategiesProvider tracker,
         IConfigProvider configProvider)
     {
         this.gameFactory = gameFactory;

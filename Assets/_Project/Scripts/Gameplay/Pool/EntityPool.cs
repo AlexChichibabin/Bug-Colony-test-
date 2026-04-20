@@ -13,7 +13,8 @@ public class EntityPool : IEntityPool
 	private readonly PoolContainer container;
 	private readonly IConfigProvider configProvider;
     //private readonly IGameFactory gameFactory;
-	private readonly IEntityStrategiesTracker tracker;
+	//private readonly IEntityStrategiesProvider tracker;
+	private readonly List<IEntityFactory> factories;
 
     private readonly Dictionary<EntityId, List<IPoolable>> allObjects = new();
 	private readonly Dictionary<EntityId, Stack<IPoolable>> availableObjects = new();
@@ -24,13 +25,15 @@ public class EntityPool : IEntityPool
 	public EntityPool(
 		IConfigProvider configProvider,
 		//IGameFactory gameFactory,
-		PoolContainer container,
-        IEntityStrategiesTracker tracker)
+		List<IEntityFactory> factories,
+		PoolContainer container)
 	{
 		this.configProvider = configProvider;
-		//this.gameFactory = gameFactory;
-		this.container = container;
-		this.tracker = tracker;
+        //this.gameFactory = gameFactory;
+		this.factories = factories;
+
+        this.container = container;
+		//this.tracker = tracker;
 	}
 
 	public async UniTask PrewarmAsync(EntityId id,int count, Vector3 pos, Quaternion rot, CancellationToken token)
@@ -84,9 +87,21 @@ public class EntityPool : IEntityPool
 	{
 		EntityConfig config = configProvider.GetEntity(id);
 
-		if (!tracker.EntityFactories.ContainsKey(id)) return null;
+		//if (!tracker.EntityFactories.ContainsKey(id)) return null;
+		GameObject go = new();
 
-        GameObject go = await tracker.EntityFactories[id].CreateEntity(position, rotation, token);
+        foreach (var fact in factories)
+		{
+			if (fact.Id == id)
+				go = await fact.CreateEntity(position, rotation, token);
+			else
+				continue;
+        }
+
+            
+        
+        
+        //GameObject go = await tracker.EntityFactories[id].CreateEntity(position, rotation, token);
         //GameObject go = await gameFactory.CreateNewAsync(config.PrefabReference, position, rotation, token);
 
         go.transform.SetParent(container.transform);

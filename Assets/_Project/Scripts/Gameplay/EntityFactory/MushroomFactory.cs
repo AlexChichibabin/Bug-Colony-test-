@@ -9,11 +9,11 @@ public class MushroomFactory : IEntityFactory
 
     private IGameFactory gameFactory;
     private EntityConfig config;
-    private IEntityStrategiesTracker tracker;
+    private IEntityStrategiesProvider tracker;
 
     public MushroomFactory(
         IGameFactory gameFactory,
-        IEntityStrategiesTracker tracker,
+        IEntityStrategiesProvider tracker,
         IConfigProvider configProvider)
     {
         this.gameFactory = gameFactory;

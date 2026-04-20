@@ -3387,7 +3387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BugSpawner
   poolContainer: {fileID: 525992701}
   spawnPoint: {fileID: 644563468}
-  spawnZone: {fileID: 0}
+  spawnZone: {fileID: 956852715}
 --- !u!1 &1023061764
 GameObject:
   m_ObjectHideFlags: 0
@@ -3748,7 +3748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelInstaller
   levelStateMachineTicker: {fileID: 1154755134}
-  bugSpawner: {fileID: 1012205986}
+  entitySpawner: {fileID: 1012205986}
   spawnZone: {fileID: 956852715}
   poolContainer: {fileID: 525992702}
 --- !u!114 &1154755136

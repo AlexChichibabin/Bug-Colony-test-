@@ -8,8 +8,9 @@ public class BugControllerAI : MonoBehaviour, IControllerAI, ISpawnable
 {
 	public IEntityComponentRoot Root => root;
 
-	[Inject] private NearestTargetStrategy strategy; // must be interface
-	private IEntityComponentRoot root;
+    //[Inject] private NearestTargetStrategy strategy; // must be interface
+    private ITargetingStrategy strategy;
+    private IEntityComponentRoot root;
 	private ReactiveProperty<IDestructible> target = new();
 
 	private IMovable movable;
@@ -41,7 +42,7 @@ public class BugControllerAI : MonoBehaviour, IControllerAI, ISpawnable
 	}
     public void SetStrategy(ITargetingStrategy strategy)
     {
-        //this.strategy = strategy;
+        this.strategy = strategy;
     }
     private void ActivateTargeting()
 	{

@@ -4,7 +4,7 @@ using Zenject;
 public class LevelInstaller : MonoInstaller
 {
     [SerializeField] private LevelStateMachineTicker levelStateMachineTicker;
-    [SerializeField] private EntitySpawner bugSpawner;
+    [SerializeField] private EntitySpawner entitySpawner;
     [SerializeField] private CubeAreaForNavMesh spawnZone;
     [SerializeField] private PoolContainer poolContainer;
 
@@ -14,7 +14,7 @@ public class LevelInstaller : MonoInstaller
 
         RegisterGameplayServices();
         RegisterSplitRules();
-        RegisterStratigies();
+        RegisterStrategies();
         RegisterFactories();
 
         RegisterLevelStateMachine();
@@ -49,7 +49,7 @@ public class LevelInstaller : MonoInstaller
     {
         Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
         Container.Bind<IEntityPool>().To<EntityPool>().AsSingle().NonLazy();
-        Container.Bind<IEntitySpawner>().FromInstance(bugSpawner).AsSingle();
+        Container.Bind<IEntitySpawner>().FromInstance(entitySpawner).AsSingle();
         Container.Bind<ITargetResolver>().To<TargetResolver>().AsSingle();
         Container.Bind<IEntityTracker>().To<EntityTracker>().AsSingle();
         Container.Bind<ICubeArea>().FromInstance(spawnZone).AsSingle();
@@ -57,12 +57,12 @@ public class LevelInstaller : MonoInstaller
     }
     private void RegisterSplitRules()
     {
-        Container.Bind<IEntityStrategiesTracker>().To<EntityStrategiesTracker>().AsSingle();
+        Container.Bind<IEntityStrategiesProvider>().To<EntityStrategiesProvider>().AsSingle();
         Container.Bind<IEntityRule>().To<WorkerSpawnRunner>().AsSingle();
         Container.Bind<IEntityRule>().To<PredatorSpawnRunner>().AsSingle();
         Container.Bind<IEntityRule>().To<FoodSpawnRunner>().AsSingle();
     }
-    private void RegisterStratigies()
+    private void RegisterStrategies()
     {
         Container.Bind<ITargetingStrategy>().To<NearestTargetStrategy>().AsSingle();
         Container.Bind<ITargetingStrategy>().To<WeakestTargetStrategy>().AsSingle();
