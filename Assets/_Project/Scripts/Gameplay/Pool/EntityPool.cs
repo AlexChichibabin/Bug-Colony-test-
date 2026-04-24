@@ -12,8 +12,8 @@ public class EntityPool : IEntityPool
 
 	private readonly PoolContainer container;
 	private readonly IConfigProvider configProvider;
-	//private readonly IEntityFactoryProvider factoryProvider;
-    private readonly IGameFactory gameFactory;
+	private readonly IEntityFactoryProvider factoryProvider;
+    //private readonly IGameFactory gameFactory;
 
     private readonly Dictionary<EntityId, List<IPoolable>> allObjects = new();
 	private readonly Dictionary<EntityId, Stack<IPoolable>> availableObjects = new();
@@ -23,14 +23,15 @@ public class EntityPool : IEntityPool
 
 	public EntityPool(
 		IConfigProvider configProvider,
-        //IEntityFactoryProvider factoryProvider,
-		PoolContainer container,
-		IGameFactory gameFactory)
+		IEntityFactoryProvider factoryProvider,
+		PoolContainer container/*,
+		IGameFactory gameFactory*/
+		)
 	{
 		this.configProvider = configProvider;
-		//this.factoryProvider = factoryProvider;
+		this.factoryProvider = factoryProvider;
         this.container = container;
-		this.gameFactory = gameFactory;
+		//this.gameFactory = gameFactory;
 	}
 
 	public async UniTask PrewarmAsync(EntityId id,int count, Vector3 pos, Quaternion rot, CancellationToken token)
@@ -85,10 +86,10 @@ public class EntityPool : IEntityPool
 	{
 		EntityConfig config = configProvider.GetEntity(id);
 
-        //if (!factoryProvider.Factories.ContainsKey(id)) return null;
-        //GameObject go = await factoryProvider.Factories[id].CreateEntity(position, rotation, token);
-        GameObject go = await gameFactory.CreateNewAsync(config.PrefabReference, position, rotation, token);
-		go.GetComponent<EntityComponentRoot>().Initialize();
+        if (!factoryProvider.Factories.ContainsKey(id)) return null;
+		GameObject go = await factoryProvider.Factories[id].CreateEntity(position, rotation, token);
+  //      GameObject go = await gameFactory.CreateNewAsync(config.PrefabReference, position, rotation, token);
+		//go.GetComponent<EntityComponentRoot>().Initialize();
 
         go.transform.SetParent(container.transform);
 		IPoolable plb = go.GetComponent<IPoolable>();

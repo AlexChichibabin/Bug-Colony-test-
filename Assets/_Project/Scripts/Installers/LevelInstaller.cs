@@ -15,7 +15,7 @@ public class LevelInstaller : MonoInstaller
         RegisterGameplayServices();
         RegisterSplitRules();
         //RegisterStrategies();
-        //RegisterFactories();
+        RegisterFactories();
 
         RegisterLevelStateMachine();
 

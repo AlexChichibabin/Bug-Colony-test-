@@ -8,22 +8,25 @@ public sealed class PredatorFactory : IEntityFactory
 
 
     private IGameFactory gameFactory;
+    private IConfigProvider configProvider;
     private EntityConfig config;
-    private IEntityRulesProvider tracker;
+    //private IEntityRulesProvider tracker;
 
     public PredatorFactory(
         IGameFactory gameFactory,
-        IEntityRulesProvider tracker,
+        //IEntityRulesProvider tracker,
         IConfigProvider configProvider)
     {
         this.gameFactory = gameFactory;
-        this.tracker = tracker;
-        config = configProvider.GetEntity(Id);
+        //this.tracker = tracker;
+        this.configProvider = configProvider;
     }
 
 
     public async UniTask<GameObject> CreateEntity(Vector3 position, Quaternion rotation, CancellationToken token)
     {
+        config = configProvider.GetEntity(Id);
+
         GameObject go = await gameFactory.CreateNewAsync(config.PrefabReference, position, rotation, token);
 
         IEntityComponentRoot root = go.GetComponent<IEntityComponentRoot>();
