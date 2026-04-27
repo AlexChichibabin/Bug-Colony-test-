@@ -10,12 +10,12 @@ public class WorkerFactory : IEntityFactory
     private IGameFactory gameFactory;
     private EntityConfig config;
     private IConfigProvider configProvider;
-    private IStrategiesProvider strategyProvider;
+    private IStrategyProvider strategyProvider;
 
     public WorkerFactory(
         IGameFactory gameFactory,
         IConfigProvider configProvider,
-        IStrategiesProvider strategyProvider)
+        IStrategyProvider strategyProvider)
     {
         this.gameFactory = gameFactory;
         this.configProvider = configProvider;

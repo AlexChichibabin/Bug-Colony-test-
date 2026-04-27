@@ -27,11 +27,6 @@ public class MushroomFactory : IEntityFactory
 
         IEntityComponentRoot root = go.GetComponent<IEntityComponentRoot>();
         root.Initialize();
-        //if (root.TryGetCapability(out IControllerAI controller))
-        //{
-        //    if (tracker.TargetingStrategy.ContainsKey(config.TargetingStrategy))
-        //        controller.SetStrategy(tracker.TargetingStrategy[TargetingStrategyType.FindNearest]);
-        //}
 
         return go;
     }

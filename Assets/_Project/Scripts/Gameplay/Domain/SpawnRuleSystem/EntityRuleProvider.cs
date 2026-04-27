@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class EntityRulesProvider : IEntityRulesProvider, IDisposable
+public class EntityRuleProvider : IEntityRuleProvider, IDisposable
 {
 	public IReadOnlyDictionary<EntityId, IEntityRule> EntityRules => rules;
 
     private Dictionary<EntityId, IEntityRule> rules = new();
 
-    public EntityRulesProvider(List<IEntityRule> rules)
+    public EntityRuleProvider(List<IEntityRule> rules)
 	{
 		this.rules = rules.ToDictionary(x => x.Id, x => x);
     }

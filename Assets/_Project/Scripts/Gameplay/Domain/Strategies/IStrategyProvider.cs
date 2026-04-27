@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public interface IStrategiesProvider
+public interface IStrategyProvider
 {
     IReadOnlyDictionary<TargetingStrategyType, ITargetingStrategy> TargetingStrategy { get; }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public interface IEntityRulesProvider
+public interface IEntityRuleProvider
 {
 	IReadOnlyDictionary<EntityId, IEntityRule> EntityRules { get; }
 

@@ -10,12 +10,12 @@ public sealed class PredatorFactory : IEntityFactory
     private IGameFactory gameFactory;
     private IConfigProvider configProvider;
     private EntityConfig config;
-    private IStrategiesProvider strategyProvider;
+    private IStrategyProvider strategyProvider;
 
     public PredatorFactory(
         IGameFactory gameFactory,
         IConfigProvider configProvider,
-        IStrategiesProvider strategyProvider)
+        IStrategyProvider strategyProvider)
     {
         this.gameFactory = gameFactory;
         this.configProvider = configProvider;

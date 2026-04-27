@@ -8,7 +8,7 @@ public class Splitable : MonoBehaviour, ISplitable, IDisposable
     public IEntityComponentRoot Root => root;
 
 	[Inject] private IEntitySpawner spawner;
-	[Inject] private IEntityRulesProvider ruleTracker;
+	[Inject] private IEntityRuleProvider ruleTracker;
 
 	private IFeedable feedable;
     private IEntityComponentRoot root;

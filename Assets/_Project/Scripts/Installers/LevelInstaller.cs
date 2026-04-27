@@ -57,14 +57,14 @@ public class LevelInstaller : MonoInstaller
     }
     private void RegisterSplitRules()
     {
-        Container.Bind<IEntityRulesProvider>().To<EntityRulesProvider>().AsSingle();
+        Container.Bind<IEntityRuleProvider>().To<EntityRuleProvider>().AsSingle();
         Container.Bind<IEntityRule>().To<WorkerSpawnRunner>().AsSingle();
         Container.Bind<IEntityRule>().To<PredatorSpawnRunner>().AsSingle();
         Container.Bind<IEntityRule>().To<FoodSpawnRunner>().AsSingle();
     }
     private void RegisterStrategies()
     {
-        Container.Bind<IStrategiesProvider>().To<StrategiesProvider>().AsSingle();
+        Container.Bind<IStrategyProvider>().To<StrategyProvider>().AsSingle();
         Container.Bind<ITargetingStrategy>().To<NearestTargetStrategy>().AsSingle();
         Container.Bind<ITargetingStrategy>().To<WeakestTargetStrategy>().AsSingle();
     }
