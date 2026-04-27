@@ -8,9 +8,8 @@ public class BugControllerAI : MonoBehaviour, IControllerAI, ISpawnable
 {
 	public IEntityComponentRoot Root => root;
 
-	//[Inject] private IEntityRulesProvider stratProvider;
 	private ITargetingStrategy targetStrategy;
-	[Inject] private ITargetResolver resolver;
+	//[Inject] private ITargetResolver resolver;
     private IEntityComponentRoot root;
 	private ReactiveProperty<IDestructible> target = new();
 
@@ -28,8 +27,11 @@ public class BugControllerAI : MonoBehaviour, IControllerAI, ISpawnable
 		root.TryGetCapability(out attack);
 		root.TryGetCapability(out trigger);
 	}
-
-	public void OnSpawned()
+    private void OnDestroy()
+    {
+        disp.Dispose();
+    }
+    public void OnSpawned()
 	{
 		ActivateTargeting();
 		ActivateMove();
