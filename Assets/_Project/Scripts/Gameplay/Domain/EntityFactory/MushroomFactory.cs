@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class MushroomFactory : IEntityFactory
 {
-    public EntityId Id => EntityId.AntWorker;
+    public EntityId Id => EntityId.Mushroom;
 
 
     private IGameFactory gameFactory;
     private EntityConfig config;
-    private IEntityRulesProvider tracker;
+    private IConfigProvider configProvider;
 
     public MushroomFactory(
         IGameFactory gameFactory,
-        IEntityRulesProvider tracker,
         IConfigProvider configProvider)
     {
         this.gameFactory = gameFactory;
-        this.tracker = tracker;
-        config = configProvider.GetEntity(Id);
+        this.configProvider = configProvider;
     }
 
     public async UniTask<GameObject> CreateEntity(Vector3 position, Quaternion rotation, CancellationToken token)
     {
+        config = configProvider.GetEntity(Id);
+
         GameObject go = await gameFactory.CreateNewAsync(config.PrefabReference, position, rotation, token);
 
         IEntityComponentRoot root = go.GetComponent<IEntityComponentRoot>();

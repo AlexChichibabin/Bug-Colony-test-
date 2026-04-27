@@ -9,7 +9,7 @@ public class BugControllerAI : MonoBehaviour, IControllerAI, ISpawnable
 	public IEntityComponentRoot Root => root;
 
 	//[Inject] private IEntityRulesProvider stratProvider;
-	//private ITargetingStrategy strategy;
+	private ITargetingStrategy targetStrategy;
 	[Inject] private ITargetResolver resolver;
     private IEntityComponentRoot root;
 	private ReactiveProperty<IDestructible> target = new();
@@ -41,9 +41,9 @@ public class BugControllerAI : MonoBehaviour, IControllerAI, ISpawnable
 		if (disp != null)
 			disp?.Clear();
 	}
-    public void SetStrategy(ITargetingStrategy strategy)
+    public void SetStrategy(ITargetingStrategy targetStrategy)
     {
-        //this.strategy = strategy;
+        this.targetStrategy = targetStrategy;
     }
     private void ActivateTargeting()
 	{
@@ -106,6 +106,6 @@ public class BugControllerAI : MonoBehaviour, IControllerAI, ISpawnable
 			actorConfig: root.Config
 			);
 
-		target.Value = resolver.Resolve(ctx);// .Select(ctx);
-	}
+		target.Value = targetStrategy.Select(ctx);
+    }
 }

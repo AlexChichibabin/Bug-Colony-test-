@@ -10,16 +10,16 @@ public sealed class PredatorFactory : IEntityFactory
     private IGameFactory gameFactory;
     private IConfigProvider configProvider;
     private EntityConfig config;
-    //private IEntityRulesProvider tracker;
+    private IStrategiesProvider strategyProvider;
 
     public PredatorFactory(
         IGameFactory gameFactory,
-        //IEntityRulesProvider tracker,
-        IConfigProvider configProvider)
+        IConfigProvider configProvider,
+        IStrategiesProvider strategyProvider)
     {
         this.gameFactory = gameFactory;
-        //this.tracker = tracker;
         this.configProvider = configProvider;
+        this.strategyProvider = strategyProvider;
     }
 
 
@@ -31,11 +31,11 @@ public sealed class PredatorFactory : IEntityFactory
 
         IEntityComponentRoot root = go.GetComponent<IEntityComponentRoot>();
         root.Initialize();
-        //if (root.TryGetCapability(out IControllerAI controller))
-        //{
-        //    if (tracker.TargetingStrategy.ContainsKey(config.TargetingStrategy))
-        //        controller.SetStrategy(tracker.TargetingStrategy[TargetingStrategyType.FindNearest]);
-        //}
+        if (root.TryGetCapability(out IControllerAI controller))
+        {
+            if (strategyProvider.TargetingStrategy.ContainsKey(config.TargetingStrategy))
+                controller.SetStrategy(strategyProvider.TargetingStrategy[config.TargetingStrategy]);
+        }
 
         return go;
     }

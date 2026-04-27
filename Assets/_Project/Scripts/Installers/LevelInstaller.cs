@@ -14,7 +14,7 @@ public class LevelInstaller : MonoInstaller
 
         RegisterGameplayServices();
         RegisterSplitRules();
-        //RegisterStrategies();
+        RegisterStrategies();
         RegisterFactories();
 
         RegisterLevelStateMachine();
@@ -48,7 +48,7 @@ public class LevelInstaller : MonoInstaller
     private void RegisterGameplayServices()
     {
         Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
-        Container.Bind<IEntityPool>().To<EntityPool>().AsSingle().NonLazy();
+        Container.Bind<IEntityPool>().To<EntityPool>().AsSingle();
         Container.Bind<IEntitySpawner>().FromInstance(entitySpawner).AsSingle();
         Container.Bind<ITargetResolver>().To<TargetResolver>().AsSingle();
         Container.Bind<IEntityTracker>().To<EntityTracker>().AsSingle();
@@ -64,6 +64,7 @@ public class LevelInstaller : MonoInstaller
     }
     private void RegisterStrategies()
     {
+        Container.Bind<IStrategiesProvider>().To<StrategiesProvider>().AsSingle();
         Container.Bind<ITargetingStrategy>().To<NearestTargetStrategy>().AsSingle();
         Container.Bind<ITargetingStrategy>().To<WeakestTargetStrategy>().AsSingle();
     }
